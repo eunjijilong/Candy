@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://${DB_DOMAIN}:${DB_PORT}/candy?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: ENC(I3WC6f7XbissxnqTpHqW/U84u9kB/8Gofpedx34pZhbYUegQSUhzFwVfV3UvtFntZ+5tcWBhzQGfR/iTAb9Trg+OqunykgGyFZtAmlpVQ915PtK8RznH56xyhdKInCj5zpotQiYOzkA=)
+    username: ENC(I8pMeRhANPbTigt8FCD40g==)
+    password: ENC(6q5oI1uTTpEEl/8Xx7O6rOyHX1sZmp77)
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: create
+    properties:
+      hibernate:
+        # sql 변수 생성 시 자동으로 ``으로 감싸준다.
+        globally_quoted_identifiers: true
+        # 콘솔에 뜨는 sql 보기 좋게 만들어준다.
+        format_sql: true
+
+  redis:
+    host: ENC(jr0SM42I4qYjhfJ8gelc8SNCmKXv7n5u60vxpRf8nRc=)
+    port: 6379
+    password: ENC(KNbWApPqG31bZT7D95uv0iLjKwbN86Ly)
+  cache: redis
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: candy
+  export:
+    prometheus:
+      enabled: true
